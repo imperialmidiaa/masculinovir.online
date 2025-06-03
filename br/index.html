@@ -44,20 +44,37 @@
       }
     </style>
 
-<script language=javascript type="text/javascript">
-dayName = new Array ("domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado")
-monName = new Array ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "agosto", "outubro", "novembro", "dezembro")
-now = new Date
+<div class="banner">
+  ESPERA... ¿Recuerdas la última vez que tu mujer gimió tu nombre?<br>
+  🔥 Esta oferta desaparece en <span id="timer">13:00</span> – Temporizador real ⏰
+</div>
+
+<script>
+  let tiempoRestante = 13 * 60;
+
+  function formatearTiempo(segundos) {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
+  }
+
+  function iniciarCuentaRegresiva() {
+    const elementoTimer = document.getElementById("timer");
+
+    const intervalo = setInterval(() => {
+      if (tiempoRestante <= 0) {
+        clearInterval(intervalo);
+        elementoTimer.innerHTML = "00:00";
+      } else {
+        elementoTimer.innerHTML = formatearTiempo(tiempoRestante);
+        tiempoRestante--;
+      }
+    }, 1000);
+  }
+
+  iniciarCuentaRegresiva();
 </script>
 
-</head>
-
-<body>
-
-<div class="banner py-lg-1 py-sm-1 center white">
-<script language=javascript type="text/javascript">
-now = new Date
-document.write ("<br><h5> Cupom de desconto válido até hoje, <b>" + dayName[now.getDay() ] + ", " + now.getDate () + " de " + monName [now.getMonth() ]   +  " de "  +     now.getFullYear () + "! </b></h5><br>")
 
 </script>
     </div>
