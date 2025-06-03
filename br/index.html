@@ -44,10 +44,25 @@
       }
     </style>
 
-<div class="banner">
-  ESPERA... ¿Recuerdas la última vez que tu mujer gimió tu nombre?<br>
-  🔥 Esta oferta desaparece en <span id="timer">13:00</span> – Temporizador real ⏰
+<div class="banner text-center d-flex flex-column justify-content-center align-items-center">
+  <div>
+    <span style="font-weight: bold;">ESPERA...</span> ¿Recuerdas la última vez que tu mujer gimió tu nombre?
+  </div>
+  <div>
+    🔥 Esta oferta desaparece en <span id="timer">13:00</span> – Temporizador real ⏰
+  </div>
 </div>
+
+<style>
+  .banner {
+    font-size: 1.4rem;
+    background-color: red;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Cabin', sans-serif;
+  }
+</style>
 
 <script>
   let tiempoRestante = 13 * 60;
@@ -74,6 +89,7 @@
 
   iniciarCuentaRegresiva();
 </script>
+
 
 
 </script>
