@@ -18,54 +18,37 @@
     <link rel="stylesheet" href="./assets/css/com.css">
 
     <!-- Título da Página -->
-    <title>Bienestar y Salud</title>
+<div class="banner">
+  ESPERA... ¿Recuerdas la última vez que tu mujer gimió tu nombre?<br>
+  🔥 Esta oferta desaparece en <span id="timer">13:00</span> – Temporizador real ⏰
+</div>
 
-    <style type="text/css">
-    header {
-      color: black;
-      background-image: rgb(8, 0, 45);
-      background-color: rgb(255, 255, 255);
-      background-position: center;
-      background-size: cover;
-      background-attachment: fixed;
-      background-blend-mode: darken;
-    }
+<script>
+  let tiempoRestante = 13 * 60;
 
-.center {
-        text-align: center;
+  function formatearTiempo(segundos) {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
+  }
+
+  function iniciarCuentaRegresiva() {
+    const elementoTimer = document.getElementById("timer");
+
+    const intervalo = setInterval(() => {
+      if (tiempoRestante <= 0) {
+        clearInterval(intervalo);
+        elementoTimer.innerHTML = "00:00";
+      } else {
+        elementoTimer.innerHTML = formatearTiempo(tiempoRestante);
+        tiempoRestante--;
       }
+    }, 1000);
+  }
 
-.banner {
-        font-size: 2vw;
-        background-color: rgb(255, 0, 0);
-        font-family: sans-serif;
-        font-weight: bold;
-        color: #fff;
-      }
-    </style>
-
-<script language=javascript type="text/javascript">
-dayName = new Array ("domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado")
-monName = new Array ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "agosto", "outubro", "novembro", "dezembro")
-now = new Date
+  iniciarCuentaRegresiva();
 </script>
 
-</head>
-
-<body>
-
-<div class="banner py-lg-1 py-sm-1 center white">
-<script language=javascript type="text/javascript">
-now = new Date
-document.write ("<br><h5> Cupom de desconto válido até hoje, <b>" + dayName[now.getDay() ] + ", " + now.getDate () + " de " + monName [now.getMonth() ]   +  " de "  +     now.getFullYear () + "! </b></h5><br>")
-
-</script>
-    </div>
-
-    <header class="py-4">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
 
                 <h5>Eu não quero que o dinheiro seja um <u><i>problema</i></u> quando se trata de alcançar o corpo ideal...<br><br>
 
