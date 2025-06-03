@@ -57,7 +57,34 @@ now = new Date
 <div class="banner py-lg-1 py-sm-1 center white">
 <script language=javascript type="text/javascript">
 now = new Date
-document.write ("<br><h5> Cupom de desconto válido até hoje, <b>" + dayName[now.getDay() ] + ", " + now.getDate () + " de " + monName [now.getMonth() ]   +  " de "  +     now.getFullYear () + "! </b></h5><br>")
+<h5 id="timerText" style="color:red;"></h5>
+
+<script>
+// Tiempo total: 13 minutos (en segundos)
+let tiempoRestante = 13 * 60;
+
+function formatearTiempo(segundos) {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
+}
+
+function iniciarCuentaRegresiva() {
+    const elementoTimer = document.getElementById("timerText");
+
+    const intervalo = setInterval(() => {
+        if (tiempoRestante <= 0) {
+            clearInterval(intervalo);
+            elementoTimer.innerHTML = "<b>⚠️ ¡El cupón ha expirado!</b>";
+        } else {
+            elementoTimer.innerHTML = `⏰ <b>¡Cupón de descuento válido por: ${formatearTiempo(tiempoRestante)}!</b>`;
+            tiempoRestante--;
+        }
+    }, 1000);
+}
+
+iniciarCuentaRegresiva();
+</script>
 
 </script>
     </div>
