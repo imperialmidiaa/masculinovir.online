@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acessar Produto</title>
+  <title>Acceder al Producto</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
     #container {
       position: relative;
       width: 100vw;
       height: 100vh;
+      background-color: #ffffff;
     }
 
     #hotmart-layer {
@@ -55,6 +57,20 @@
     .mobile #botao-falso {
       display: block;
     }
+
+    #mensagem-carga {
+      position: absolute;
+      top: 45vh;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      color: #444;
+      z-index: 3;
+    }
+
+    .esconder {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -64,17 +80,23 @@
     <div id="hotmart-sales-funnel"></div>
   </div>
 
-  <button id="botao-falso">PULSE AQUÍ PARA ACCEDER A SU PRODUCTO</button>
+  <div id="mensagem-carga">Cargando acceso...</div>
+
+  <button id="botao-falso">Haz clic aquí para acceder a tu producto</button>
 </div>
 
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
   checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
 
-  // Detecta se é mobile
   const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
   if (isMobile) {
-    document.getElementById("container").classList.add("mobile");
+    // Espera 2 segundos antes de liberar o botão falso
+    setTimeout(() => {
+      document.getElementById("container").classList.add("mobile");
+      document.getElementById("mensagem-carga").classList.add("esconder");
+    }, 2000);
   }
 </script>
 
