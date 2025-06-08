@@ -11,13 +11,13 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
+      background-color: #ffffff;
     }
 
     #container {
       position: relative;
       width: 100vw;
       height: 100vh;
-      background-color: #ffffff;
     }
 
     #hotmart-layer {
@@ -60,16 +60,40 @@
 
     #mensagem-carga {
       position: absolute;
-      top: 45vh;
+      top: 40vh;
       left: 50%;
       transform: translateX(-50%);
       font-size: 18px;
       color: #444;
       z-index: 3;
+      text-align: center;
     }
 
     .esconder {
       display: none;
+    }
+
+    .loader-bar {
+      width: 80vw;
+      height: 10px;
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 20px auto 0;
+    }
+
+    .loader-bar::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      animation: loading 5s linear infinite;
+    }
+
+    @keyframes loading {
+      0% { width: 0; }
+      100% { width: 100%; }
     }
   </style>
 </head>
@@ -80,23 +104,35 @@
     <div id="hotmart-sales-funnel"></div>
   </div>
 
-  <div id="mensagem-carga">Cargando acceso...</div>
+  <div id="mensagem-carga">
+    <div>Cargando acceso...</div>
+    <div class="loader-bar"></div>
+  </div>
 
   <button id="botao-falso">Haz clic aquí para acceder a tu producto</button>
 </div>
 
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
-  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
 
   const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   if (isMobile) {
-    // Espera 2 segundos antes de liberar o botão falso
-    setTimeout(() => {
-      document.getElementById("container").classList.add("mobile");
-      document.getElementById("mensagem-carga").classList.add("esconder");
-    }, 2000);
+    const observer = new MutationObserver((mutations, obs) => {
+      const hotmartContainer = document.getElementById("hotmart-sales-funnel");
+      if (hotmartContainer && hotmartContainer.innerHTML.includes("button")) {
+        // Elemento do botão apareceu
+        document.getElementById("container").classList.add("mobile");
+        document.getElementById("mensagem-carga").classList.add("esconder");
+        obs.disconnect();
+      }
+    });
+
+    observer.observe(document.getElementById("hotmart-sales-funnel"), {
+      childList: true,
+      subtree: true
+    });
   }
 </script>
 
