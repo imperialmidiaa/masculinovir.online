@@ -1,545 +1,195 @@
-<div id="faixa-cidade" style="display:none; background-color: red; color: white; text-align: center; padding: 15px; font-weight: bold; font-size: 20px;">
-  🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span id="cidade">sua cidade</span>!
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  $.get("https://ipinfo.io?token=SEU_TOKEN_AQUI", function(response) {
-    const cidade = response.city;
-    if (cidade) {
-      document.getElementById("cidade").innerText = cidade;
-      document.getElementById("faixa-cidade").style.display = 'block';
-    }
-  }, "jsonp");
-</script>
-
 <!DOCTYPE html>
 <html lang="pt-BR" dir="ltr">
-
 <head>
-   <link rel="preload" href="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/player.js" as="script">
-<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script">
-<link rel="preload" href="https://images.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/thumbnail.jpg" as="image">
-<link rel="preload" href="https://cdn.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/683daadbc4e13a4240b3646e/main.m3u8" as="fetch">
-<link rel="dns-prefetch" href="https://cdn.converteai.net">
-<link rel="dns-prefetch" href="https://scripts.converteai.net">
-<link rel="dns-prefetch" href="https://images.converteai.net">
-<link rel="dns-prefetch" href="https://api.vturb.com.br">
-   
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://masculinovir.online">
-    <meta property="og:title" content="Conteúdo Exclusivo">
-    <meta property="og:description" content="Conteúdo Exclusivo">
-    <meta property="og:image" content="https://img.imageboss.me/atm/cdn/format:auto/u/umsGbYu2QNOfeAn5fEqSwCDI4VE3/l/rBhIAv7621085.png">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conteúdo Exclusivo">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Dosis:wght@200;300;400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&family=Signika:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/com.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conteúdo Exclusivo">
 
-  <!-- Título da Página -->
   <title>Conteúdo Exclusivo!</title>
 
-  <style type="text/css">
+  <!-- Meta OG -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://masculinovir.online">
+  <meta property="og:title" content="Conteúdo Exclusivo">
+  <meta property="og:description" content="Conteúdo Exclusivo">
+  <meta property="og:image" content="https://img.imageboss.me/atm/cdn/format:auto/u/umsGbYu2QNOfeAn5fEqSwCDI4VE3/l/rBhIAv7621085.png">
+
+  <!-- Estilos e fontes -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Dosis&family=Oswald&family=Signika&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/com.css">
+
+  <!-- Pré-carregamento -->
+  <link rel="preload" href="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script">
+  <link rel="preload" href="https://images.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/thumbnail.jpg" as="image">
+  <link rel="preload" href="https://cdn.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/683daadbc4e13a4240b3646e/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+  <style>
+    body {
+      font-family: 'Cabin', sans-serif;
+    }
     header {
-      color: white;
-      background-image: rgb(8, 0, 45);
-      background-color: rgb(255, 255, 255);
+      background-color: white;
       background-position: center;
       background-size: cover;
       background-attachment: fixed;
       background-blend-mode: darken;
     }
+    #faixa-cidade {
+      display: none;
+      background-color: red;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 20px;
+    }
   </style>
-  
 </head>
 
 <body>
+
+  <!-- Tarja de cidade -->
+  <div id="faixa-cidade">
+    🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span id="cidade">sua cidade</span>!
+  </div>
+
+  <!-- Header + Vídeo -->
   <header class="py-4">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          
+
           <!-- VSL -->
-<div id="vid_683dac92c4e13a4240b36659" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0;"> <img id="thumb_683dac92c4e13a4240b36659" src="https://images.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_683dac92c4e13a4240b36659" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_683dac92c4e13a4240b36659"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/player.js", s.async=!0,document.head.appendChild(s); </script>
-           
-          <link rel="prerender" href="https://pay.hotmart.com/F100075194F?bid=1748910478558"/>
-
-          <!-- Botão 1 -->
-            <div id="cta1" class="mt-4 d-none">
-              <a href="https://pay.hotmart.com/F100075194F?bid=1748910478558?checkoutMode=10" class="btn btn-success btn-lg btn-block" style="text-decoration: none;">
-              <br>
-              <span class="span-btn">COMPRAR AGORA!</span>   
-              <br>
-              </a>
+          <div id="vid_683dac92c4e13a4240b36659" style="position: relative; width: 100%; padding: 177.78% 0 0;">
+            <img id="thumb_683dac92c4e13a4240b36659"
+              src="https://images.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/thumbnail.jpg"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail">
+            <div id="backdrop_683dac92c4e13a4240b36659"
+              style="-webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%;">
             </div>
           </div>
+          <script type="text/javascript" id="scr_683dac92c4e13a4240b36659">
+            var s = document.createElement("script");
+            s.src = "https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/683dac92c4e13a4240b36659/player.js";
+            s.async = true;
+            document.head.appendChild(s);
+          </script>
+
+          <!-- Botão CTA 1 -->
+          <div id="cta1" class="mt-4 d-none">
+            <a href="https://pay.hotmart.com/F100075194F?bid=1748910478558&checkoutMode=10"
+              class="btn btn-success btn-lg btn-block" style="text-decoration: none;">
+              <br>
+              <span class="span-btn">COMPRAR AGORA!</span>
+              <br>
+            </a>
+          </div>
+
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
+  <!-- Comentários simulados (você pode colar aqui os que quiser manter) -->
   <section class="comments py-4">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script>$.get("https://ipinfo.io/json", function (response) {
-        $("#address").html(response.city);
-      }, "jsonp");
-    </script>
-      
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="fb-comments" style="margin-top: 5px;">
-            <div class="fb-comments-header">
-              <span>21 de 174 comentarios</span>
-            </div>
-            <div class="fb-comments-wrapper" id="2">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m2.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Tereza Mendonça</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Mi marido utilizó este método y se convirtió en un hombre diferente</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>8</likes>
+      <p class="text-center">💬 Comentários reais de quem já assistiu</p>
+      <!-- ... Comentários aqui ... -->
+    </div>
 
-                      <date>4 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="3">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m3.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Josefa Perez</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Aqui en <span id="address" style="color:#000000;">Salvador</span> sólo hablan de esta receta, Creo que se lo recomendaré a un amigo......</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>9</likes>
+    <!-- Botão CTA 2 -->
+    <div id="cta2" class="mt-4 d-none text-center">
+      <a href="https://pay.hotmart.com/F100075194F?bid=1748910478558" class="btn btn-success btn-lg btn-block">
+        <br>
+        <span class="span-btn">QUERO ENTRAR PARA O GRUPO DA MINHA CIDADE</span>
+        <br>
+      </a>
+    </div>
+  </section>
 
-                      <date>5 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="4">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m4.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Maria Carmen</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Mi marido se volvió más viril, ¡me encantó!</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>11</likes>
-
-                      <date>12 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="5">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/h2.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Carlos Castro</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Este método es muy fácil de aplicar y no interfiere con mi rutina diaria.</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>15</likes>
-
-                      <date>19 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="6">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m6.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Maria Rodriguez</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Ahora mi marido me lo quiere hacer todo el tiempo, ya no lo soporto jejeje.</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>17</likes>
-
-                      <date>24 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="7">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m7.jpeg"></td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Roberta Gomes</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">Me sorprendió la rapidez de los resultados</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>18</likes>
-
-                      <date>26 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="fb-comments-wrapper" id="9">
-              <table class="fb-comments-comment">
-                <tbody>
-                  <tr>
-                    <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m11.jpeg">
-                    </td>
-                    <td>
-                      <font class="fb-comments-comment-name">
-                        <name>Carmen González</name>
-                      </font>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-text">¡Gracias por enseñar algo que realmente funciona!</td>
-                  </tr>
-                  <tr>
-                    <td class="fb-comments-comment-actions">
-                      <like>Curtir</like>
-                      ·
-                      <reply>Responder</reply>
-                      ·
-                      <likes>22</likes>
-
-                      <date>39 min</date>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <button class="fb-comments-loadmore" onclick="javascript:loadMore();">Ver mais
-              comentários</button>
-            <div style="display:none" id="more">
-              <div class="fb-comments-wrapper">
-                <table class="fb-comments-comment" id="10">
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m12.jpeg">
-                      </td>
-                      <td>
-                        <font class="fb-comments-comment-name">
-                          <name>Lucía Fernandez</name>
-                        </font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-text">Este pequeño secreto cambió mi relación con mi marido, salvó nuestro matrimonio</td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-actions">
-                        <like>Curtir</like>
-                        ·
-                        <reply>Responder</reply>
-                        ·
-                        <likes>41</likes>
-
-                        <date>1 h</date>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="fb-comments-wrapper" id="11">
-                <table class="fb-comments-comment">
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m15.jpeg">
-                      </td>
-                      <td>
-                        <font class="fb-comments-comment-name">
-                          <name>Maria Isabel Alvarez</name>
-                        </font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-text">Lo mejor de todo es que no tiene efectos secundarios negativos.</td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-actions">
-                        <like>Curtir</like>
-                        ·
-                        <reply>Responder</reply>
-                        ·
-                        <likes>40</likes>
-
-                        <date>1 h</date>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="fb-comments-wrapper" id="12">
-                <table class="fb-comments-comment">
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m16.jpeg">
-                      </td>
-                      <td>
-                        <font class="fb-comments-comment-name">
-                          <name>Maria Sanchez</name>
-                        </font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-text">Tienes la solución perfecta para cualquier hombre.</td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-actions">
-                        <like>Curtir</like>
-                        ·
-                        <reply>Responder</reply>
-                        ·
-                        <likes>47</likes>
-
-                        <date>1 h</date>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="fb-comments-wrapper" id="13">
-                <table class="fb-comments-comment">
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m17.jpeg"></td>
-                      <td>
-                        <font class="fb-comments-comment-name">
-                          <name>Marta Gomez</name>
-                        </font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-text">Quiero hacer un informe. Mi matrimonio estaba a punto de terminar, mi marido ya no venía a verme, siempre con excusas y más excusas. Después de un tiempo, empezó a cambiar y ahora me quiere todos los días. Gracias, muchas gracias</td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-actions">
-                        <like>Curtir</like>
-                        ·
-                        <reply>Responder</reply>
-                        ·
-                        <likes>50</likes>
-
-                        <date>1 h</date>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="fb-comments-wrapper">
-                <table class="fb-comments-comment" id="14">
-                  <tbody>
-                    <tr>
-                      <td rowspan="3" class="fb-comments-comment-img"><img src="https://sd.masculinovir.online/assets/img/comentarios/m18.jpeg">
-                      </td>
-                      <td>
-                        <font class="fb-comments-comment-name">
-                          <name>Maria Angeles</name>
-                        </font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-text">Si eres hombre y no utilizas este método, lo siento por ti.</td>
-                    </tr>
-                    <tr>
-                      <td class="fb-comments-comment-actions">
-                        <like>Curtir</like>
-                        ·
-                        <reply>Responder</reply>
-                        ·
-                        <likes>66</likes>
-
-                        <date>1 h</date>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-  
-<!-- Botão 2 -->
-            <div id="cta2" class="mt-4 d-none">
-              <a href="https://pay.hotmart.com/F100075194F?bid=1748910478558" class="btn btn-success btn-lg btn-block" style="text-decoration: none;">
-              <br>
-              <span class="span-btn">¡QUIERO CURAR MI DISFUNCION ERECTIL AHORA!</span>
-              <br>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+  <!-- Rodapé -->
   <footer class="bg-white py-3 text-center">
-
-    <span style="color:#6C757D">Copyright 2024 – Contenido exclusivo ®
-        <br>Todos os direitos reservados.</span><br><br>
-
-      <div class="text-secondary"><a href="termos.html" class="text-secondary">Termos de Uso</a> – <a href="privacidade.html"
-          class="text-secondary">Políticas de Privacidade</a></div><br>
-
-<script>
-    let prefix = ["https://payment.hotmart.com", "https://pay.hotmart.com", "https://go.hotmart.com"];
-
-function getParams() {
-    let t = "",
-        e = window.top.location.href,
-        r = new URL(e);
-    if (null != r) {
-        let a = r.searchParams.get("utm_source"),
-            n = r.searchParams.get("utm_medium"),
-            o = r.searchParams.get("utm_campaign"),
-            m = r.searchParams.get("utm_term"),
-            c = r.searchParams.get("utm_content"); - 1 !== e.indexOf("?") && (t = `&sck=${a}|${n}|${o}|${m}|${c}`), console.log(t)
-    }
-    return t
-}! function() {
-    var t = new URLSearchParams(window.location.search);
-    t.toString() && document.querySelectorAll("a").forEach(function(e) {
-        for (let r = 0; r < prefix.length; r++) - 1 !== e.href.indexOf(prefix[r]) && (-1 === e.href.indexOf("?") ? e.href += "?" + t.toString() + getParams() : e.href += "&" + t.toString() + getParams())
-    })
-}();
-</script>
-
-        <script type="text/javascript">
-      var back_redirect_back_link = "/br" + location.search;
-      history.pushState({}, "", location.href);
-      history.pushState({}, "", location.href);
-
-      window.addEventListener(
-        "popstate",
-        function (event) {
-          if (event.state) {
-            setTimeout(function () {
-              location.href = back_redirect_back_link;
-            }, 1);
-          }
-        },
-        false
-      );
-    </script>
-          
+    <span style="color:#6C757D">Copyright 2024 – Conteúdo exclusivo ®
+      <br>Todos os direitos reservados.</span><br><br>
+    <div class="text-secondary">
+      <a href="termos.html" class="text-secondary">Termos de Uso</a> – 
+      <a href="privacidade.html" class="text-secondary">Políticas de Privacidade</a>
+    </div>
   </footer>
 
-      <script type="text/javascript">
-      setTimeout(() => {document.getElementById("cta1").classList.remove("d-none"); document.getElementById("cta2").classList.remove("d-none")}, 1635000); // temporização da Call to Action (em milissegundos)
-    </script>
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $.get("https://ipinfo.io?token=SEU_TOKEN_AQUI", function (response) {
+      const cidade = response.city;
+      if (cidade) {
+        document.getElementById("cidade").innerText = cidade;
+        document.getElementById("faixa-cidade").style.display = 'block';
+      }
+    }, "jsonp");
+  </script>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <script src="./assets/js/com.js"></script>
+  <script>
+    // Mostra CTA após X milissegundos (27min = 1635000ms)
+    setTimeout(() => {
+      document.getElementById("cta1").classList.remove("d-none");
+      document.getElementById("cta2").classList.remove("d-none");
+    }, 1635000);
+  </script>
+
+  <script>
+    // UTM forwarding
+    let prefix = ["https://payment.hotmart.com", "https://pay.hotmart.com", "https://go.hotmart.com"];
+    function getParams() {
+      let t = "", e = window.top.location.href, r = new URL(e);
+      if (r) {
+        let a = r.searchParams.get("utm_source"),
+          n = r.searchParams.get("utm_medium"),
+          o = r.searchParams.get("utm_campaign"),
+          m = r.searchParams.get("utm_term"),
+          c = r.searchParams.get("utm_content");
+        if (e.indexOf("?") !== -1) t = `&sck=${a}|${n}|${o}|${m}|${c}`;
+      }
+      return t;
+    }
+    (function () {
+      var t = new URLSearchParams(window.location.search);
+      t.toString() && document.querySelectorAll("a").forEach(function (e) {
+        for (let r = 0; r < prefix.length; r++)
+          if (e.href.indexOf(prefix[r]) !== -1)
+            e.href += (e.href.indexOf("?") === -1 ? "?" : "&") + t.toString() + getParams();
+      });
+    })();
+  </script>
+
+  <script>
+    // Back button redirect
+    var back_redirect_back_link = "/br" + location.search;
+    history.pushState({}, "", location.href);
+    history.pushState({}, "", location.href);
+    window.addEventListener("popstate", function () {
+      setTimeout(() => {
+        location.href = back_redirect_back_link;
+      }, 1);
+    }, false);
+  </script>
+
+  <!-- Pixel UTMify -->
+  <script>
+    window.pixelId = "683f87f5ef7ec40a5e2fca5a";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
 
 </body>
 </html>
-<script>
-  window.pixelId = "683f87f5ef7ec40a5e2fca5a";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-<script>
-  $.get("https://ipinfo.io?token=SEU_TOKEN_AQUI", function(response) {
-    const cidade = response.city;
-    if (cidade) {
-      document.getElementById("cidade").innerText = cidade;
-      document.getElementById("faixa-cidade").style.display = 'block';
-    }
-  }, "jsonp");
-</script>
