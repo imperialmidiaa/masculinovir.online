@@ -534,3 +534,12 @@ function getParams() {
   a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
   document.head.appendChild(a);
 </script>
+<script>
+  $.get("https://ipinfo.io?token=SEU_TOKEN_AQUI", function(response) {
+    const cidade = response.city;
+    if (cidade) {
+      document.getElementById("cidade").innerText = cidade;
+      document.getElementById("faixa-cidade").style.display = 'block';
+    }
+  }, "jsonp");
+</script>
