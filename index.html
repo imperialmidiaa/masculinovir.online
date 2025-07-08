@@ -1,3 +1,19 @@
+<div id="faixa-cidade" style="display:none; background-color: red; color: white; text-align: center; padding: 15px; font-weight: bold; font-size: 20px;">
+  🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span id="cidade">sua cidade</span>!
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $.get("https://ipinfo.io?token=SEU_TOKEN_AQUI", function(response) {
+    const cidade = response.city;
+    if (cidade) {
+      document.getElementById("cidade").innerText = cidade;
+      document.getElementById("faixa-cidade").style.display = 'block';
+    }
+  }, "jsonp");
+</script>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR" dir="ltr">
 
