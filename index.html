@@ -34,53 +34,239 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Headline com Cidade</title>
     <style>
-        .headline {
-            background-color: #dc2626;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            font-weight: bold;
+        * {
             margin: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .headline {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 900;
+            line-height: 1.3;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            border-bottom: 3px solid #991b1b;
+        }
+        
+        .headline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         
         .loading {
-            opacity: 0.7;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .cidade-nome {
+            color: #fef08a;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 1.1em;
+        }
+        
+        /* Melhorias para mobile */
+        @media (max-width: 768px) {
+            .headline {
+                padding: 18px 12px;
+                font-size: 18px;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .headline {
+                padding: 16px 10px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="headline" class="headline loading">
-        🚨 CARREGANDO SUA LOCALIZAÇÃO...
+        🚨 LOCALIZANDO VOCÊ...
     </div>
 
     <script>
-        // Função para obter a cidade do usuário
-        async function obterCidade() {
-            try {
-                // Usando API de geolocalização por IP
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
+        class LocalizadorCidade {
+            constructor() {
+                this.headline = document.getElementById('headline');
+                this.tentativas = 0;
+                this.maxTentativas = 3;
+                this.init();
+            }
+            
+            async init() {
+                // Primeiro tenta geolocalização HTML5 (mais precisa)
+                if (navigator.geolocation) {
+                    this.tentarGeolocalizacao();
+                } else {
+                    this.tentarPorIP();
+                }
+            }
+            
+            tentarGeolocalizacao() {
+                const options = {
+                    enableHighAccuracy: true,
+                    timeout: 8000,
+                    maximumAge: 300000 // 5 minutos
+                };
                 
-                const cidade = data.city || 'sua região';
-                const headline = document.getElementById('headline');
+                navigator.geolocation.getCurrentPosition(
+                    (position) => this.obterCidadePorCoordenadas(position.coords),
+                    (error) => {
+                        console.log('Geolocalização falhou:', error.message);
+                        this.tentarPorIP();
+                    },
+                    options
+                );
+            }
+            
+            async obterCidadePorCoordenadas(coords) {
+                try {
+                    const { latitude, longitude } = coords;
+                    
+                    // Usando API de geocodificação reversa
+                    const response = await fetch(
+                        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=pt`
+                    );
+                    
+                    if (!response.ok) throw new Error('API falhou');
+                    
+                    const data = await response.json();
+                    const cidade = data.city || data.locality || data.principalSubdivision;
+                    
+                    if (cidade) {
+                        this.exibirCidade(cidade);
+                        return;
+                    }
+                    
+                    throw new Error('Cidade não encontrada');
+                    
+                } catch (error) {
+                    console.log('Erro coordenadas:', error);
+                    this.tentarPorIP();
+                }
+            }
+            
+            async tentarPorIP() {
+                const apis = [
+                    {
+                        url: 'https://ipapi.co/json/',
+                        getCidade: data => data.city
+                    },
+                    {
+                        url: 'https://api.ipgeolocation.io/ipgeo?apiKey=at_your_service',
+                        getCidade: data => data.city
+                    },
+                    {
+                        url: 'https://ipwhois.app/json/',
+                        getCidade: data => data.city
+                    },
+                    {
+                        url: 'https://api.db-ip.com/v2/free/self',
+                        getCidade: data => data.city
+                    }
+                ];
                 
-                headline.innerHTML = `🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE ${cidade.toUpperCase()}!`;
-                headline.classList.remove('loading');
+                for (const api of apis) {
+                    try {
+                        this.tentativas++;
+                        
+                        const response = await fetch(api.url);
+                        if (!response.ok) continue;
+                        
+                        const data = await response.json();
+                        const cidade = api.getCidade(data);
+                        
+                        if (cidade && cidade.length > 1) {
+                            this.exibirCidade(cidade);
+                            return;
+                        }
+                        
+                    } catch (error) {
+                        console.log(`Erro na API ${api.url}:`, error);
+                        continue;
+                    }
+                }
                 
-            } catch (error) {
-                console.log('Erro ao obter localização:', error);
-                // Fallback caso a API falhe
-                const headline = document.getElementById('headline');
-                headline.innerHTML = '🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE SUA CIDADE!';
-                headline.classList.remove('loading');
+                // Se todas as APIs falharam
+                this.exibirFallback();
+            }
+            
+            exibirCidade(cidade) {
+                const cidadeFormatada = this.formatarCidade(cidade);
+                this.headline.innerHTML = `🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span class="cidade-nome">${cidadeFormatada}</span>!`;
+                this.headline.classList.remove('loading');
+                
+                // Adiciona efeito de sucesso
+                this.headline.style.animation = 'none';
+                setTimeout(() => {
+                    this.headline.style.animation = '';
+                }, 100);
+            }
+            
+            formatarCidade(cidade) {
+                // Remove caracteres especiais e formata
+                return cidade
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toUpperCase()
+                    .trim();
+            }
+            
+            exibirFallback() {
+                // Tenta detectar pelo timezone como última opção
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                let cidadeEstimada = 'SUA CIDADE';
+                
+                if (timezone.includes('Sao_Paulo')) cidadeEstimada = 'SÃO PAULO';
+                else if (timezone.includes('Recife')) cidadeEstimada = 'RECIFE';
+                else if (timezone.includes('Manaus')) cidadeEstimada = 'MANAUS';
+                else if (timezone.includes('Cuiaba')) cidadeEstimada = 'CUIABÁ';
+                else if (timezone.includes('America/Fortaleza')) cidadeEstimada = 'FORTALEZA';
+                
+                this.headline.innerHTML = `🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span class="cidade-nome">${cidadeEstimada}</span>!`;
+                this.headline.classList.remove('loading');
             }
         }
-
-        // Executar quando a página carregar
-        document.addEventListener('DOMContentLoaded', obterCidade);
+        
+        // Inicializar quando página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new LocalizadorCidade();
+        });
+        
+        // Fallback adicional para dispositivos muito lentos
+        setTimeout(() => {
+            const headline = document.getElementById('headline');
+            if (headline.classList.contains('loading')) {
+                headline.innerHTML = '🚨 VOCÊ FOI SELECIONADO PARA O GRUPO DE <span class="cidade-nome">SUA CIDADE</span>!';
+                headline.classList.remove('loading');
+            }
+        }, 12000); // 12 segundos timeout
     </script>
 </body>
 </html>
