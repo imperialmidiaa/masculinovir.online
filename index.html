@@ -150,9 +150,7 @@
                     const { latitude, longitude } = coords;
                     
                     // Usando API de geocodificação reversa
-                    const response = await fetch(
-                        https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=pt
-                    );
+                    const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=pt`);
                     
                     if (!response.ok) throw new Error('API falhou');
                     
