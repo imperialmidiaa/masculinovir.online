@@ -644,7 +644,8 @@ function getParams() {
   <script src="./assets/js/com.js"></script>
 
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-           <style>
+          <!-- INÍCIO DAS NOTIFICAÇÕES AUTOMÁTICAS -->
+<style>
   .notification-box {
     position: fixed;
     bottom: 30px;
@@ -676,27 +677,40 @@ function getParams() {
 
 <script>
   const nomes = ["Ana", "Carla", "Juliana", "Renata", "Mariana", "Fernanda", "Camila", "Patrícia", "Bruna", "Gabriela"];
-  const cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Fortaleza", "Salvador", "Recife", "Manaus", "Brasília", "Porto Alegre"];
+  let cidadeUsuario = "SUA CIDADE";
+
+  // Reutiliza a mesma lógica da localização já existente
+  async function detectarCidadeUsuario() {
+    try {
+      const res = await fetch("https://ipinfo.io/json?token=72cbdc417f34d4");
+      const data = await res.json();
+      if (data.city) cidadeUsuario = data.city.toUpperCase();
+    } catch (e) {
+      cidadeUsuario = "SUA CIDADE";
+    }
+  }
 
   function mostrarNotificacao() {
     const nome = nomes[Math.floor(Math.random() * nomes.length)];
-    const cidade = cidades[Math.floor(Math.random() * cidades.length)];
     const notificacao = document.getElementById("notificacao");
-    notificacao.innerHTML = `${nome} acabou de entrar<br><span>${cidade}</span>`;
+    notificacao.innerHTML = `${nome} acabou de entrar<br><span>${cidadeUsuario}</span>`;
     notificacao.classList.add("show");
     setTimeout(() => {
       notificacao.classList.remove("show");
     }, 4500);
   }
 
-  function iniciarNotificacoes() {
+  async function iniciarNotificacoes() {
+    await detectarCidadeUsuario();
     setInterval(() => {
       mostrarNotificacao();
-    }, Math.floor(Math.random() * 4000) + 8000); // entre 8s e 12s
+    }, Math.floor(Math.random() * 4000) + 8000); // 8s a 12s
   }
 
   document.addEventListener('DOMContentLoaded', iniciarNotificacoes);
 </script>
+<!-- FIM DAS NOTIFICAÇÕES AUTOMÁTICAS -->
+
 <link rel="preload" href="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/686d9ecbff5cb17449fca30a/v4/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
 <link rel="preload" href="https://cdn.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/686d9ec7500368483ab7579c/main.m3u8" as="fetch">
