@@ -143,11 +143,12 @@
                 this.exibirFallback();
             }
 
-            exibirCidade(cidade) {
-                const cidadeFormatada = this.formatarCidade(cidade);
-                this.headline.innerHTML = `🔥 Clique no vídeo para liberar sua vaga no grupo das casadas safadas de  <span class="cidade-nome">${cidadeFormatada}</span>!`;
-                this.headline.classList.remove('loading');
-            }
+           exibirCidade(cidade) {
+    const cidadeFormatada = this.formatarCidade(cidade);
+    window.cidadeUsuario = cidadeFormatada; // <- isso aqui é a chave
+    this.headline.innerHTML = `🔥 Clique no vídeo para liberar sua vaga no grupo das casadas safadas de  <span class="cidade-nome">${cidadeFormatada}</span>!`;
+    this.headline.classList.remove('loading');
+}
 
             formatarCidade(cidade) {
                 return cidade.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().trim();
