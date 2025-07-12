@@ -680,15 +680,19 @@ function getParams() {
   const nomes = ["Ana", "Carla", "Juliana", "Renata", "Mariana", "Fernanda", "Camila", "Patrícia", "Bruna", "Gabriela"];
   let cidadeUsuario = "SUA CIDADE";
 
-  // Reutiliza a mesma lógica da localização já existente
-  async function detectarCidadeUsuario() {
-    try {
-      const res = await fetch("https://ipinfo.io/json?token=72cbdc417f34d4");
-      const data = await res.json();
-      if (data.city) cidadeUsuario = data.city.toUpperCase();
-    } catch (e) {
-      cidadeUsuario = "SUA CIDADE";
-    }
+  // Se já foi definida pelo LocalizadorCidade, usa ela
+  if (window.cidadeUsuario) {
+    cidadeUsuario = window.cidadeUsuario;
+  } else {
+    // Se ainda não tiver, tenta detectar por IP como fallback
+    fetch("https://ipinfo.io/json?token=72cbdc417f34d4")
+      .then(res => res.json())
+      .then(data => {
+        if (data.city) cidadeUsuario = data.city.toUpperCase();
+      })
+      .catch(() => {
+        cidadeUsuario = "SUA CIDADE";
+      });
   }
 
   function mostrarNotificacao() {
@@ -701,8 +705,7 @@ function getParams() {
     }, 4500);
   }
 
-  async function iniciarNotificacoes() {
-    await detectarCidadeUsuario();
+  function iniciarNotificacoes() {
     setInterval(() => {
       mostrarNotificacao();
     }, Math.floor(Math.random() * 4000) + 8000); // 8s a 12s
@@ -711,6 +714,7 @@ function getParams() {
   document.addEventListener('DOMContentLoaded', iniciarNotificacoes);
 </script>
 <!-- FIM DAS NOTIFICAÇÕES AUTOMÁTICAS -->
+
 
 <link rel="preload" href="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/686d9ecbff5cb17449fca30a/v4/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
