@@ -644,6 +644,59 @@ function getParams() {
   <script src="./assets/js/com.js"></script>
 
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+           <style>
+  .notification-box {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #1e293b;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    z-index: 9999;
+  }
+  .notification-box.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .notification-box span {
+    display: block;
+    font-weight: bold;
+    color: #facc15;
+  }
+</style>
+
+<div id="notificacao" class="notification-box"></div>
+
+<script>
+  const nomes = ["Ana", "Carla", "Juliana", "Renata", "Mariana", "Fernanda", "Camila", "Patrícia", "Bruna", "Gabriela"];
+  const cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Fortaleza", "Salvador", "Recife", "Manaus", "Brasília", "Porto Alegre"];
+
+  function mostrarNotificacao() {
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const cidade = cidades[Math.floor(Math.random() * cidades.length)];
+    const notificacao = document.getElementById("notificacao");
+    notificacao.innerHTML = `${nome} acabou de entrar<br><span>${cidade}</span>`;
+    notificacao.classList.add("show");
+    setTimeout(() => {
+      notificacao.classList.remove("show");
+    }, 4500);
+  }
+
+  function iniciarNotificacoes() {
+    setInterval(() => {
+      mostrarNotificacao();
+    }, Math.floor(Math.random() * 4000) + 8000); // entre 8s e 12s
+  }
+
+  document.addEventListener('DOMContentLoaded', iniciarNotificacoes);
+</script>
 <link rel="preload" href="https://scripts.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/players/686d9ecbff5cb17449fca30a/v4/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
 <link rel="preload" href="https://cdn.converteai.net/73393e3f-90a1-4e74-a0ad-ae531cce0740/686d9ec7500368483ab7579c/main.m3u8" as="fetch">
