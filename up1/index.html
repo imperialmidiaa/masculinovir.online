@@ -1,140 +1,361 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceder al Producto</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vem me conhecer melhor 💋</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    #container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow-x: hidden;
+        }
 
-    #hotmart-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.01;
-      z-index: 1;
-      pointer-events: none;
-    }
+        .container {
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
 
-    #hotmart-sales-funnel {
-      width: 100%;
-      height: 100%;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
 
-    #botao-falso {
-      position: absolute;
-      top: 72vh;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 85vw;
-      height: 60px;
-      background-color: #000;
-      color: #fff;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 2;
-      box-shadow: 0 0 12px rgba(0,0,0,0.4);
-      display: none;
-    }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0000, #cc0000, #990000, #660000);
+            border-radius: 30px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
 
-    .mobile #botao-falso {
-      display: block;
-    }
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
 
-    #mensagem-carga {
-      position: absolute;
-      top: 40vh;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      color: #444;
-      z-index: 3;
-      text-align: center;
-    }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff0000, #ff4444, #ffffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-    .esconder {
-      display: none;
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-    .loader-bar {
-      width: 80vw;
-      height: 10px;
-      background-color: #eee;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 20px auto 0;
-    }
+        .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #ff4444;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
 
-    .loader-bar::before {
-      content: '';
-      display: block;
-      height: 100%;
-      width: 100%;
-      background-color: #000;
-      animation: loading 5s linear infinite;
-    }
+        .description {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            line-height: 1.5;
+            color: #ffcccc;
+        }
 
-    @keyframes loading {
-      0% { width: 0; }
-      100% { width: 100%; }
-    }
-  </style>
+        .confidencial {
+            font-size: 0.9em;
+            margin-bottom: 35px;
+            color: #ffaaaa;
+            font-style: italic;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25d366, #128c7e, #20b038);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .loading {
+            margin-top: 25px;
+            font-size: 1em;
+            opacity: 0.8;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 0, 0, 0.3);
+            border-top: 3px solid #ff0000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .aviso-tiktok {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(139, 0, 0, 0.15));
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            color: #ffaaaa;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            text-align: left;
+            backdrop-filter: blur(10px);
+        }
+
+        .aviso-tiktok strong {
+            color: #ff4444;
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 0, 0, 0.4);
+            font-size: 20px;
+            animation: floatHearts 8s linear infinite;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 20px;
+                padding: 40px 25px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .subtitle {
+                font-size: 1.2em;
+            }
+            .whatsapp-btn {
+                font-size: 1.1em;
+                padding: 16px 35px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <h1>Oiie Gatinho 💋</h1>
+        <div class="subtitle glow-text">Quer saber mais sobre mim?</div>
+        <p class="description">
+            Vamos conversar em um espaço privado e receber conteúdos exclusivos.<br>
+            Te espero com muito carinho 😈✨
+        </p>
+        <p class="confidencial">Conversa totalmente confidencial</p>
 
-<div id="container" class="">
-  <div id="hotmart-layer">
-    <div id="hotmart-sales-funnel"></div>
-  </div>
+        <a href="#" class="whatsapp-btn" id="whatsappBtn" aria-label="Falar agora no WhatsApp">
+            💕 Falar agora no WhatsApp
+        </a>
 
-  <div id="mensagem-carga">
-    <div>Cargando acceso...</div>
-    <div class="loader-bar"></div>
-  </div>
+        <div class="aviso-tiktok">
+            <strong>💎 No TikTok?</strong><br><br>
+            Abra no navegador (três pontinhos &gt; Abrir no navegador) e clique no botão para me chamar 💋<br><br>
+            <em>Assim você consegue falar comigo sem problemas! 😘</em>
+        </div>
 
-  <button id="botao-falso">Haz clic aquí para acceder a tu producto</button>
-</div>
+        <div class="loading hidden" id="loading">
+            <div class="spinner"></div>
+            <p>Te levando para o WhatsApp...</p>
+        </div>
+    </div>
 
-<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
-<script>
-  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+    <script>
+        // Link do WhatsApp
+        const whatsappLink = "https://wa.me/message/CSHL6PYMY3H3H1";
 
-  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const loading = document.getElementById('loading');
 
-  if (isMobile) {
-    const observer = new MutationObserver((mutations, obs) => {
-      const hotmartContainer = document.getElementById("hotmart-sales-funnel");
-      if (hotmartContainer && hotmartContainer.innerHTML.includes("button")) {
-        // Elemento do botão apareceu
-        document.getElementById("container").classList.add("mobile");
-        document.getElementById("mensagem-carga").classList.add("esconder");
-        obs.disconnect();
-      }
-    });
+        // Criar corações flutuantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.opacity = Math.random();
+            document.getElementById('hearts').appendChild(heart);
 
-    observer.observe(document.getElementById("hotmart-sales-funnel"), {
-      childList: true,
-      subtree: true
-    });
-  }
-</script>
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
 
+        // Criar corações a cada 3 segundos (reduzido para melhorar desempenho)
+        setInterval(createHeart, 3000);
+
+        // Função para abrir WhatsApp
+        function openWhatsApp() {
+            // Mostrar loading
+            loading.classList.remove('hidden');
+
+            // Tentar abrir o WhatsApp
+            window.location.href = whatsappLink;
+
+            // Fallback caso não funcione
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                alert('Se o WhatsApp não abriu, tente novamente ou copie o link: ' + whatsappLink);
+            }, 3000);
+        }
+
+        // Event listener para o botão
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openWhatsApp();
+        });
+
+        // Detectar se veio do TikTok
+        if (document.referrer.includes('tiktok.com')) {
+            console.log('Usuário veio do TikTok');
+        }
+
+        // Efeito de partículas no clique
+        document.addEventListener('click', function(e) {
+            const colors = ['#ff0000', '#cc0000', '#990000', '#660000'];
+            
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1000';
+                
+                document.body.appendChild(particle);
+                
+                const angle = (Math.PI * 2 * i) / 6;
+                const velocity = 100;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                let x = 0, y = 0;
+                const animate = () => {
+                    x += vx * 0.02;
+                    y += vy * 0.02 + 2;
+                    particle.style.transform = `translate(${x}px, ${y}px)`;
+                    particle.style.opacity = Math.max(0, 1 - Math.abs(y) / 100);
+                    
+                    if (Math.abs(y) < 100) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                };
+                animate();
+            }
+        });
+    </script>
 </body>
 </html>
