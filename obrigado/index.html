@@ -1,58 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Página de Obrigado</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: #f9f9f9;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      background-color: #ffffff;
-      padding: 50px 30px;
-      max-width: 700px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 40px;
-      font-weight: bold;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 18px 36px;
-      font-size: 20px;
-      color: white;
-      background-color: #28a745;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #218838;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta de Diagnóstico</title>
+    <style>
+        body { 
+            font-family: monospace; 
+            font-size: 16px;
+            padding: 20px; 
+            word-break: break-all; 
+            background-color: #f0f0f0;
+        }
+        h1 { 
+            font-family: sans-serif; 
+            color: #333;
+        }
+        p {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        div {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="container">
-    <h1>OBRIGADO POR CONFIAR NO NOSSO TRABALHO 🥇🚀.</h1>
-    <a class="btn" href="https://wa.me/5599984136268?text=Ol%C3%A1%20eu%20fiz%20a%20compra%20dos%20seguidores%2C%20e%20aqui%20vou%20te%20mandar%20o%20comprovante%20de%20pagamento%20e%20o%20meu%20%40%20do%20perfil%3A" target="_blank">CLIQUE AQUI PARA ENVIAR O COMPROVANTE</a>
-  </div>
-
+    <h1>Ferramenta de Diagnóstico de Navegador</h1>
+    <p>Por favor, copie todo o texto que aparece dentro da caixa branca abaixo e envie para mim:</p>
+    
+    <div>
+        <script>
+            document.write(navigator.userAgent);
+        </script>
+    </div>
 </body>
 </html>
